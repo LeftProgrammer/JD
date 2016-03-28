@@ -217,8 +217,8 @@ $(function(){
 
 $(function(){
     //1.每隔一段时间自动向某个方向滚动，最后一张到第一张流畅滚动
-//2.当鼠标经过盒子，轮播图停止，点击左右箭头可以进行切换
-//3.序号与图片对应滚动
+    //2.当鼠标经过盒子，轮播图停止，点击左右箭头可以进行切换
+    //3.序号与图片对应滚动
     //原生写法
     //获取元素
      /*var step=0;
@@ -281,10 +281,10 @@ $(function(){
     var timer=null;
     var $li = $(".adv-tip li");
     var $aImgs = $(".adv-img > a");
-    var $tipClick = $(".tip-click")[0];
+    //var $tipClick = $(".tip-click")[0];
     var $tipLeft = $(".tip-left");
     var $tipRight = $(".tip-right");
-    console.log(Object.prototype.toString.call($tipClick));
+    //console.log(Object.prototype.toString.call($tipClick));
         //1.添加li的select
     var showTip = function () {
         $li.each(function (index) {
@@ -299,7 +299,7 @@ $(function(){
         };
         $aImgs.eq(step).addClass("select").siblings().removeClass("select");
         showTip();
-        console.log(step);
+        //console.log(step);
     }
     //3.当点击click-->li时，
     $li.click(function(){
@@ -311,7 +311,7 @@ $(function(){
     })
 
     //4.当实现左右点击时
-    $(".tip-left").click(function(){
+    $tipLeft.click(function(){
         //console.log(2);
         step--;
         if(step<0){
@@ -319,32 +319,215 @@ $(function(){
         }
         $aImgs.eq(step).addClass("select").siblings().removeClass("select");
         showTip();
-        console.log(step);
+        //console.log(step);
     })
-    $(".tip-right").click(autoMove);
-
+    $tipRight.click(autoMove);
     //5.鼠标划在窗口上面，停止计时器
     $(".lun").hover(function(){
-
         window.clearInterval(timer);
-        $tipClick.style.display="block";
+        $(".tip-click")[0].style.display="block";
+        //$tipClick.css("left","block");
     },function(){
         timer = window.setInterval(autoMove, 2000);
-        $tipClick.style.display="none";
+        $(".tip-click")[0].style.display="none";
+        //$tipClick.css("left","none");
     })
 
     //6.设置定义计时器
     timer =window.setInterval(autoMove, 2000);
+
+
+
 })
 
 //推荐rec--animate动画
-    $(function(){
-        //原生写法，
-        var $rec=$(".rec");
-        var $lImgs = $(".adv-img > li");
-        var $tipClick = $(".tip-click")[0];
-        var $tipLeft = $(".tip-left");
-        var $tipRight = $(".tip-right");
+//    $(function(){
+//        var dataAry = [["img/lun1.jpg", "img/lun2.jpg", "img/lun3.jpg", "img/lun4.jpg"],["img/lun5.jpg", "img/lun6.jpg", "img/lun7.jpg", "img/lun8.jpg"],["img/lun9.jpg", "img/lun10.jpg", "img/lun11.jpg", "img/lun12.jpg"]];
+//        var step=1;
+//        var $advImgs = $(".adv-img");
+//        var $lImgs = $(".adv-img > li");
+//       // var $len = dataAry.length;
+//        var $tipClick = $(".tip-click")[1];
+//        var $tipLeft = $(".tip-left");
+//        var $tipRight = $(".tip-right");
+//
+//
+//        //初始化数据，和数据绑定
+//        var initData=function(){
+//            var str = "";
+//            str+="<li>";
+//            for(var i=0;i<dataAry[dataAry.length - 1].length;i++){
+//                str += "<a href='#' trueImg='" + dataAry[dataAry.length - 1][i] + "'></a>";
+//            }
+//            str+="</li>";
+//
+//            for (var i = 0; i < dataAry.length; i++) {
+//                str += "<li>"
+//                    for(var j=0;j<dataAry[i].length;j++){
+//                        str += "<a href='#' trueImg='" + dataAry[i][j] + "'></a>";
+//                }
+//                str+="</li>";
+//            }
+//            str+="<li>"
+//            for(var i=0;i<dataAry[0].length;i++){
+//                str += "<a href='#' trueImg='" + dataAry[0][i] + "'></a>";
+//            }
+//            str+="</li>"
+//            $advImgs.append(str);
+//            //$advImgs.innerHTML = str;
+//
+//        };
+//        initData();
+//       //图片延迟加载
+//       var initAsyncImg = function () {
+//            for (var i = 0; i < $lImgs.length; i++) {
+//                console.log(5)
+//                ~function (i) {
+//                    var curDiv = $lImgs[i];
+//                    if (!curDiv.isLoad) {
+//                        var oImg = new Image;
+//                        console.log(oImg)
+//                        oImg.src = curDiv.getAttribute("trueImg");
+//                        //oImg.src = curDiv.attr("trueImg");
+//                        oImg.onload = function () {
+//                            curDiv.appendChild(oImg);
+//                            curDiv.isLoad = true;
+//                        };
+//                    }
+//                }(i);
+//            }
+//       };
+//       window.setTimeout(initAsyncImg, 500);
+//
+//        $(".rec").hover(function(){
+//            //window.clearInterval(timer);
+//            $tipClick.style.display="block";
+//        },function() {
+//            //timer = window.setInterval(autoMove, 2000);
+//            $tipClick.style.display = "none";
+//        })
+//        $tipLeft.click(function(){
+//            if(step<1){
+//                $advImgs.css("left",-3*1000)
+//                step= 3;
+//            }
+//            $advImgs.animate({left:step*1000},500,"linear");
+//
+//            console.log($advImgs.css("left"));
+//            step--;
+//        })
+//        $tipRight.click(function() {
+//           // console.log($advImgs.css("left"));
+//            console.log($advImgs.css("left"));
+//            if(step>3){
+//                step=1;
+//                $advImgs.css("left",0*1000);
+//                console.log($advImgs.css("left"));
+//                console.log("a");
+//            }
+//            $advImgs.animate({left: -step * 1000}, 500, "linear",function(){
+//
+//            })
+//            step++;
+//        })
+//    })
 
+//京东特色购的当鼠标悬浮在某个图片上出现移动效果
+    //思路：当滑倒图片上时，图片向左移动5px,时间500ms
+
+    $(function(){
+        //jquery写法
+        $(".tans img").hover(function(){
+            $(this).css("marginLeft","-10px");
+            //$(this).css("marginTop","-10px");
+            },function(){
+            $(this).css("marginLeft","0");
+            //$(this).css("marginTop","0");
+            })
+        //原生写法
+        //var $tansImgs=$(".tans img");
+        //for(var i=0;i<$tansImgs.length;i++){
+        //    //$tansImgs[i].tansJd=i;
+        //    var cur=$tansImgs[i];
+        //    cur.onmousemove=function(){
+        //        this.style.marginLeft="-5px";
+        //    }
+        //    cur.onmouseout=function(){
+        //        this.style.marginLeft="0";
+        //    }
+        //}
 
     })
+
+//图片移动
+$(function(){
+    //$(".low-content img").hover(function(){
+    //    //$(this).style.webkitTansform="tanslate(-5px,0)";
+    //    $(this).css("left","-5px");
+    //},function(){
+    //    //$(this).style.webkitTansform="tanslate(0,0)";
+    //    $(this).css("left",0);
+    //})
+    $(".low-content img").hover(function(){
+        $(this).stop().animate({"left":"-10px"},500)
+    },function(){
+        $(this).stop().animate({"left":"0"},500)
+    })
+})
+
+//纵向滚动
+$(function(){
+    var step=0;
+    var $lowDetal=$(".low-detail");
+    var lowLis=$(".low-detail li");
+    var autoMove=function(){
+        step++;
+        if(step>=lowLis.length-1){
+            $(".low-detail").css("top",0);
+            step=1;
+        }
+        $lowDetal.animate({"top":-step*100},500,"linear")
+    }
+    window.setInterval(autoMove,2000);
+})
+
+//悬浮楼梯
+    //思路：1.当scoll到楼层出现，elevator才显示
+            //2.当鼠标悬浮到某一个a标签时，给当前a增加一个类名
+            //3.当点击某个li时，定位到当前楼层
+$(function(){
+    var winH=document.documentElement.clientHeight||document.body.clientHeight;
+    var winT=document.documentElement.scrollTop||document.body.scrollTop;
+    var $eleLis=$(".elevator li");
+    $eleLis.hover(function(){
+        $(this).addClass("current").siblings().removeClass("current");
+    })
+    //滚动加载
+    var scrollLoad =function(){
+        $(".floor iframe[_src]").each(function(){
+            var $t = $(this);
+            if( $t.offset().top<= $(document).scrollTop() + $(window).height()){
+                $t.css("display","block")
+                .attr( "src",$t.attr("_src") ).removeAttr("_src");
+            }
+        });//each E
+    }
+    scrollLoad();
+
+})
+
+//右侧悬浮的客服栏
+$(function(){
+    $(".service li").hover(function(){
+        $(this).children(".service-text").stop().animate({"left":"-61px"},200).css("display","block")
+    },function(){
+        $(this).children(".service-text").stop().animate({"left":0},200).css("display","none");
+    });
+    //下面写法会有小bug,当你多次点击时，会积累动画
+    //$(".service .fore6").click(function(){
+    //    $("html,body").stop().animate({"scrollTop":0},500)
+    //})
+    $(".service .fore6").click(function(){
+        document.documentElement.scrollTop=document.body.scrollTop=0;
+    })
+})

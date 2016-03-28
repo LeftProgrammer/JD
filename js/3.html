@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body,div,em,a,img{
+            margin:0;
+            padding:0;
+            font-family: "Microsoft Yahei", "宋体";
+        }
+        a{
+            text-decoration: none;
+        }
+        em{
+            font-style: normal;
+        }
+        .rightNav{
+            position: fixed;
+            width: 140px;
+            right: 0;
+            top: 180px;
+            _position: absolute;
+            text-align: left;
+            cursor: pointer;
+            background-image: url(about:blank);
+        }
+
+        .rightNav a {
+            display: block;
+            position: relative;
+            height: 30px;
+            line-height: 30px;
+            margin-bottom: 2px;
+            background: #fff;
+            padding-right: 10px;
+            width: 130px;
+            overflow: hidden;
+            cursor: pointer;
+            right: -110px;
+        }
+        .rightNav a em {
+            display: block;
+            float: left;
+            width: 30px;
+            background: #39A4DC;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        #top{
+             width: 1210px;
+             height: 500px;
+             margin: 0 auto;
+             background: #ff6600;
+         }
+        #Banner{
+            width: 1210px;
+            height: 300px;
+            margin: 0 auto;
+            background: #990099;
+        }
+        #Nav{
+            width: 1210px;
+            height: 500px;
+            margin: 0 auto;
+            background: #2192bc;
+        }
+        #Tab{
+            width: 1210px;
+            height: 200px;
+            margin: 0 auto;
+            background: #008000;
+        }
+        #Service{
+            width: 1210px;
+            height: 400px;
+            margin: 0 auto;
+            background: #333333;
+        }
+        #Picture{
+            width: 1210px;
+            height: 500px;
+            margin: 0 auto;
+            background: #008000;
+        }
+        #Album{
+            width: 1210px;
+            height: 500px;
+            margin: 0 auto;
+            background: #a52a2a;
+        }
+        #Form{
+            width: 1210px;
+            height: 600px;
+            margin: 0 auto;
+            background: #FFF38f;
+        }
+        #Scorlling{
+            width: 1210px;
+            height: 300px;
+            margin: 0 auto;
+            background: #FF7300;
+        }
+        #Other{
+            width: 1210px;
+            height: 500px;
+            margin: 0 auto;
+            background: #a52a2a;
+        }
+    </style>
+</head>
+<body>
+<div class="rightNav">
+    <a href="#top" style="right: -110px;"><em>^</em>回到顶部</a>
+    <a href="#Banner" style="right: -110px;"><em>1</em>焦点幻灯</a>
+    <a href="#Nav" style="right: -110px;"><em>2</em>菜单导航</a>
+    <a href="#Tab" style="right: -110px;"><em>3</em>选项卡</a>
+    <a href="#Service" style="right: -110px;"><em>4</em>在线客服</a>
+    <a href="#Picture" style="right: -110px;"><em>5</em>图片特效</a>
+    <a href="#Album" style="right: -110px;"><em>6</em>相册特效</a>
+    <a href="#Form" style="right: -110px;"><em>7</em>表单按钮</a>
+    <a href="#Scorlling" style="right: -110px;"><em>8</em>广告/滚动</a>
+    <a href="#Other" style="right: -110px;"><em>9</em>其他特效</a>
+</div>
+<div id="top"></div>
+<div id="Banner"></div>
+<div id="Nav"></div>
+<div id="Tab"></div>
+<div id="Service"></div>
+<div id="Picture"></div>
+<div id="Album"></div>
+<div id="Form"></div>
+<div id="Scorlling"></div>
+<div id="Other"></div>
+
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+    //右侧导航
+    var btb=$(".rightNav");
+    var tempS;
+    $(".rightNav").hover(function(){
+        var thisObj = $(this);
+        tempS = setTimeout(function(){
+            thisObj.find("a").each(function(i){
+                var tA=$(this);
+                setTimeout(function(){ tA.animate({right:"0"},200);},50*i);
+            });
+        },200);
+    },function(){
+        if(tempS){ clearTimeout(tempS); }
+        $(this).find("a").each(function(i){
+            var tA=$(this);
+            setTimeout(function(){ tA.animate({right:"-110"},200,function(){
+            });},50*i);
+        });
+    });
+    var isIE6 = !!window.ActiveXObject&&!window.XMLHttpRequest;
+    //滚动加载
+    var scrollLoad =function(){
+        $("#content iframe[_src]").each(function(){
+            var t = $(this);
+            if( t.offset().top<= $(document).scrollTop() + $(window).height())
+            {
+                t.attr( "src",t.attr("_src") ).removeAttr("_src");
+            }
+        });//each E
+    }
+    scrollLoad();
+    $(window).scroll(function(){
+        if(isIE6){ btb.css("top", $(document).scrollTop()+30) }
+        scrollLoad();
+    });
+
+</script>
+</body>
+</html>
